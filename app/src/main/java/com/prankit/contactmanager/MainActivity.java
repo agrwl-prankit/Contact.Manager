@@ -16,6 +16,9 @@ public class MainActivity extends AppCompatActivity {
 
         DatabaseHandler db = new DatabaseHandler(this);
 
+        // get total value
+        // Int total = String.ValueOf(db.getContactCount());
+
         // insert
         //db.addContacts(new Contact("name","phone number"));
 
