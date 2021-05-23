@@ -5,6 +5,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -41,7 +42,9 @@ public class MainActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 
         FloatingActionButton fab = findViewById(R.id.add_fab_button);
-        fab.setOnClickListener(v -> {});
+        fab.setOnClickListener(v -> {
+            startActivity(new Intent(this, AddContactActivity.class));
+        });
 
     }
 
