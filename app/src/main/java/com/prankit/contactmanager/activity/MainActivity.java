@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
+        Log.i("idid", "start");
         contactList.clear();
         List<Contact> list = db.getAllContact();
         if (!list.isEmpty()) {
@@ -60,7 +60,12 @@ public class MainActivity extends AppCompatActivity {
                 recyclerView.setAdapter(adapter);
                 recyclerView.setLayoutManager(layoutManager);
             }
-        } else Toast.makeText(this, "No contact found", Toast.LENGTH_SHORT).show();
+        } else {
+            adapter = new ShowContactAdapter(MainActivity.this, contactList);
+            recyclerView.setAdapter(adapter);
+            recyclerView.setLayoutManager(layoutManager);
+            Toast.makeText(this, "No contact found", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

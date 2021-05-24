@@ -1,10 +1,13 @@
 package com.prankit.contactmanager.activity;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -16,7 +19,7 @@ import com.prankit.contactmanager.R;
 public class AddContactActivity extends AppCompatActivity {
 
     private TextInputEditText input_name, input_number;
-    private Button addButton;
+    private Button addButton, deleteButton;
     private DatabaseHandler db;
     private String get_name;
     private String get_id;
@@ -31,6 +34,7 @@ public class AddContactActivity extends AppCompatActivity {
         input_name = findViewById(R.id.input_name);
         input_number = findViewById(R.id.input_number);
         addButton = findViewById(R.id.add_contact_button);
+        deleteButton = findViewById(R.id.delete_contact_button);
 
         Toolbar toolbar = findViewById(R.id.add_contact_toolbar);
         setSupportActionBar(toolbar);
@@ -45,6 +49,7 @@ public class AddContactActivity extends AppCompatActivity {
             get_number = getIntent().getStringExtra("number");
             input_name.setText(get_name);
             input_number.setText(get_number);
+            deleteButton.setVisibility(View.VISIBLE);
         }
 
         addButton.setOnClickListener(v -> {
@@ -52,6 +57,23 @@ public class AddContactActivity extends AppCompatActivity {
             if (addButton.getText().toString().equals("Update")) updateContact(get_id, input_name.getText().toString(), input_number.getText().toString());
             else addContact(input_name.getText().toString(), input_number.getText().toString());
         });
+
+        deleteButton.setOnClickListener(v -> {
+            deleteContact(get_id, input_name.getText().toString(), input_number.getText().toString());
+        });
+    }
+
+    private void deleteContact(String id, String name, String number) {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(AddContactActivity.this);
+        dialog.setIcon(android.R.drawable.ic_dialog_alert);
+        dialog.setMessage("Do you want to delete this contact?");
+        dialog.setPositiveButton("Yes", (dialogInterface, i) -> {
+            Contact contact = new Contact(Integer.parseInt(id), name, number);
+            db.deleteContact(contact);
+            Toast.makeText(this, "Contact deleted successfully", Toast.LENGTH_SHORT).show();
+            finish();
+        }).setNegativeButton("No", (dialogInterface, i) -> {});
+        dialog.create(); dialog.show();
     }
 
     private void updateContact(String id, String name, String number) {
