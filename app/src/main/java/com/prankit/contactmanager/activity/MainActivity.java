@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -42,15 +43,14 @@ public class MainActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 
         FloatingActionButton fab = findViewById(R.id.add_fab_button);
-        fab.setOnClickListener(v -> {
-            startActivity(new Intent(this, AddContactActivity.class));
-        });
+        fab.setOnClickListener(v -> startActivity(new Intent(this, AddContactActivity.class)));
 
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+
         contactList.clear();
         List<Contact> list = db.getAllContact();
         if (!list.isEmpty()) {
@@ -61,5 +61,11 @@ public class MainActivity extends AppCompatActivity {
                 recyclerView.setLayoutManager(layoutManager);
             }
         } else Toast.makeText(this, "No contact found", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }
