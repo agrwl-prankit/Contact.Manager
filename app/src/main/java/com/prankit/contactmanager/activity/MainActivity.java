@@ -102,19 +102,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        db = new DatabaseHandler(this);
-//        dbRef = FirebaseDatabase.getInstance().getReference();
-//        phoneId = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
-//
 //        dateP = findViewById(R.id.datePicker);
-//        recyclerView = findViewById(R.id.recycle_view);
-//        recyclerView.setHasFixedSize(true);
-//        layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-//
 
-//
-//        FloatingActionButton fab = findViewById(R.id.add_fab_button);
-//        fab.setOnClickListener(v -> startActivity(new Intent(this, AddContactActivity.class)));
+
 //        dateP.setOnClickListener(v -> {
 //            final Calendar c = Calendar.getInstance();
 //            this.mYear = c.get(Calendar.YEAR);
@@ -165,25 +155,7 @@ public class MainActivity extends AppCompatActivity {
 //        }
 //    }
 //
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        contactList.clear();
-//        List<Contact> list = db.getAllContact();
-//        if (!list.isEmpty()) {
-//            for (Contact c : list) {
-//                contactList.add(c);
-//                adapter = new ShowContactAdapter(MainActivity.this, contactList);
-//                recyclerView.setAdapter(adapter);
-//                recyclerView.setLayoutManager(layoutManager);
-//            }
-//        } else {
-//            adapter = new ShowContactAdapter(MainActivity.this, contactList);
-//            recyclerView.setAdapter(adapter);
-//            recyclerView.setLayoutManager(layoutManager);
-//            Toast.makeText(this, "No contact found", Toast.LENGTH_SHORT).show();
-//        }
-//    }
+
 //
 
 //
