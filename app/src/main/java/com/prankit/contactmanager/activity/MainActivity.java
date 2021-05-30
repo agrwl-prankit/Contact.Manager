@@ -111,18 +111,7 @@ public class MainActivity extends AppCompatActivity {
 //        recyclerView.setHasFixedSize(true);
 //        layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 //
-//        dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                isDataExist = snapshot.child(phoneId).exists();
-//                if (!isDataExist) getContact();
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
+
 //
 //        FloatingActionButton fab = findViewById(R.id.add_fab_button);
 //        fab.setOnClickListener(v -> startActivity(new Intent(this, AddContactActivity.class)));
@@ -196,30 +185,7 @@ public class MainActivity extends AppCompatActivity {
 //        }
 //    }
 //
-//    private void getContact() {
-//        contactList.clear();
-//        // pass all phone book to cursor
-//        Cursor cursor = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-//                null, null, null, null);
-//        // fetch all the contacts from cursor
-//        while (cursor.moveToNext()){
-//            // pass data into string from cursor
-//            String name = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
-//            String num = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-//            // add data into array list
-//            Map<String, Object> map = new HashMap<>();
-//            map.put("name", name);
-//            map.put("number", num);
-//            DatabaseReference messageKeyRef = dbRef.child(phoneId).push();
-//            String messagePushId = messageKeyRef.getKey();
-//            try {
-//                dbRef.child(phoneId).child(messagePushId).updateChildren(map);
-//            } catch (Exception e) {
-//               Log.i("firebase exception", e.getMessage());
-//            }
-//
-//        }
-//    }
+
 //
 //    public void getCallDetails(int day, int month, int year){
 //        Cursor managedCursor = getContentResolver().query(CallLog.Calls.CONTENT_URI, null, null, null, null);
