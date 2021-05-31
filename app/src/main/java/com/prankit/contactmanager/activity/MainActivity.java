@@ -52,21 +52,11 @@ import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
-//    DatabaseHandler db;
-//    private RecyclerView recyclerView;
-//    private RecyclerView.LayoutManager layoutManager;
-//    private RecyclerView.Adapter adapter;
-//    private ArrayList<Contact> contactList = new ArrayList<>();
-//    private DatabaseReference dbRef;
-//    private String phoneId;
-//    private boolean isDataExist = false;
 //    private Button dateP;
 //    private int mDay;
 //    private int mMonth;
 //    private int mYear;
 
-    private static final int CONTACT_PERMISSION_CODE = 100;
-    private static final int CALL_LOG_PERMISSION_CODE = 101;
 
     @SuppressLint("HardwareIds")
     @Override
@@ -102,9 +92,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        dateP = findViewById(R.id.datePicker);
-
-
 //        dateP.setOnClickListener(v -> {
 //            final Calendar c = Calendar.getInstance();
 //            this.mYear = c.get(Calendar.YEAR);
@@ -112,14 +99,6 @@ public class MainActivity extends AppCompatActivity {
 //            this.mDay = c.get(Calendar.DAY_OF_MONTH);
 //            showDialog(1);
 //        });
-//
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
-//                checkSelfPermission(Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED){
-//            requestPermissions(new String[]{Manifest.permission.READ_CONTACTS}, 1);
-//        }
-
-        //getCallDetails();
-
     }
 
 //    @Override
@@ -142,60 +121,6 @@ public class MainActivity extends AppCompatActivity {
 //            getCallDetails(dayOfMonth, monthOfYear, year);
 //        }
 //    };
-//
-//    @RequiresApi(api = Build.VERSION_CODES.M)
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-//        if (requestCode == 1) {
-//            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//            } else {
-//                Toast.makeText(this, "Please provide permission to write contacts", Toast.LENGTH_SHORT).show();
-//            }
-//        }
-//    }
-//
-
-//
-
-//
-//    public void getCallDetails(int day, int month, int year){
-//        Cursor managedCursor = getContentResolver().query(CallLog.Calls.CONTENT_URI, null, null, null, null);
-//        int number = managedCursor.getColumnIndex(CallLog.Calls.NUMBER);
-//        int type = managedCursor.getColumnIndex(CallLog.Calls.TYPE);
-//        int date = managedCursor.getColumnIndex(CallLog.Calls.DATE);
-//        int duration = managedCursor.getColumnIndex(CallLog.Calls.DURATION);
-//        Log.i("callLogCount", ""+managedCursor.getCount());
-//        while (managedCursor.moveToNext()){
-//            String phNumber = managedCursor.getString( number );
-//            String callType = managedCursor.getString( type );
-//            Date callDayTime = new Date(Long.parseLong(managedCursor.getString( date )));
-//            Log.i("callLog", callDayTime.toString());
-//            Log.i("callLog 1", day+"/"+month+"/"+year);
-//            Log.i("callLog 2", callDayTime.getDate() + "/" + callDayTime.getMonth() + "/" + callDayTime.toString().substring(callDayTime.toString().length() - 4));
-//            //callDayTime.toString().substring(callDayTime.toString().length() - 4)
-//            if (callDayTime.getDate() == day && callDayTime.getMonth() == month) {
-//                String callDuration = managedCursor.getString(duration);
-//                String dir = null;
-//                int dircode = Integer.parseInt(callType);
-//                switch (dircode) {
-//                    case CallLog.Calls.OUTGOING_TYPE:
-//                        dir = "OUTGOING";
-//                        break;
-//
-//                    case CallLog.Calls.INCOMING_TYPE:
-//                        dir = "INCOMING";
-//                        break;
-//
-//                    case CallLog.Calls.MISSED_TYPE:
-//                        dir = "MISSED";
-//                        break;
-//                }
-//                Log.i("callLogList", phNumber + "-" + callDayTime);
-//            }
-//        }
-//        managedCursor.close();
-//    }
 
     @Override
     public void onBackPressed() {
