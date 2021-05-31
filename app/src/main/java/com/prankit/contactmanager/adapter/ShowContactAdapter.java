@@ -4,10 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Icon;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +25,7 @@ import com.prankit.contactmanager.activity.MainActivity;
 
 import java.util.ArrayList;
 
-public class ShowContactAdapter extends RecyclerView.Adapter<ShowContactAdapter.ViewHolder>{
+public class ShowContactAdapter extends RecyclerView.Adapter<ShowContactAdapter.ViewHolder> {
 
     private Context context;
     private ArrayList<Contact> contactList;
@@ -45,18 +47,26 @@ public class ShowContactAdapter extends RecyclerView.Adapter<ShowContactAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.itemView.setTag(contactList.get(position).getId());
-        Log.i("idid", String.valueOf(contactList.get(position).getId()));
+
+        holder.call.setVisibility(View.VISIBLE);
+        holder.edit.setVisibility(View.VISIBLE);
 
         holder.name.setText(contactList.get(position).getName());
         holder.number.setText(contactList.get(position).getPhoneNumber());
 
-        holder.itemView.setOnClickListener(v -> {
+        holder.call.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_CALL);
+            intent.setData(Uri.parse("tel:" + contactList.get(position).getPhoneNumber()));
+            context.startActivity(intent);
+        });
+
+        holder.edit.setOnClickListener(v -> {
             Intent intent = new Intent(context, AddContactActivity.class);
             intent.putExtra("id", String.valueOf(contactList.get(position).getId()));
             intent.putExtra("name", contactList.get(position).getName());
             intent.putExtra("number", contactList.get(position).getPhoneNumber());
             context.startActivity(intent);
-                });
+        });
     }
 
     @Override
@@ -64,12 +74,16 @@ public class ShowContactAdapter extends RecyclerView.Adapter<ShowContactAdapter.
         return contactList.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder {
         TextView name, number;
+        ImageView call, edit;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.show_name);
             number = itemView.findViewById(R.id.show_mobile);
+            call = itemView.findViewById(R.id.contact_call);
+            edit = itemView.findViewById(R.id.contact_edit);
         }
     }
 }

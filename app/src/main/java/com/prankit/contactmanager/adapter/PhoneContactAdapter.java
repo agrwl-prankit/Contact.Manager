@@ -2,6 +2,7 @@ package com.prankit.contactmanager.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,6 +41,12 @@ public class PhoneContactAdapter extends RecyclerView.Adapter<PhoneContactAdapte
 
         holder.name.setText(contactList.get(position).getName());
         holder.number.setText(contactList.get(position).getPhoneNumber());
+
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_CALL);
+            intent.setData(Uri.parse("tel:" + contactList.get(position).getPhoneNumber()));
+            context.startActivity(intent);
+        });
 
     }
 

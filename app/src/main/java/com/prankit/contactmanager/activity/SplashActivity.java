@@ -19,7 +19,7 @@ import com.prankit.contactmanager.R;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private boolean call = false, contact = false;
+    private boolean call = false, contact = false, doCall = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,25 +34,14 @@ public class SplashActivity extends AppCompatActivity {
 
     private void goToMainActivity() {
         Log.i("splashPerm",call + " goto " + contact);
-        if (call && contact){
+        if (call && contact && doCall){
             Intent intent = new Intent(SplashActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
         }
     }
 
-    private void checkCallLogPermission() {
-        Log.i("splashPerm","call check");
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CALL_LOG) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(SplashActivity.this, new String[]{Manifest.permission.READ_CALL_LOG}, 2);
-        } else {
-            call = true;
-            goToMainActivity();
-        }
-    }
-
     private void checkContactPermission() {
-        Log.i("splashPerm","contact check");
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(SplashActivity.this, new String[]{Manifest.permission.READ_CONTACTS}, 1);
         } else {
@@ -61,11 +50,28 @@ public class SplashActivity extends AppCompatActivity {
         }
     }
 
+    private void checkCallLogPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CALL_LOG) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(SplashActivity.this, new String[]{Manifest.permission.READ_CALL_LOG}, 2);
+        } else {
+            call = true;
+            checkCallPermission();
+        }
+    }
+
+    public void checkCallPermission(){
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(SplashActivity.this, new String[]{Manifest.permission.CALL_PHONE}, 3);
+        } else {
+            doCall = true;
+            goToMainActivity();
+        }
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        Log.i("splashPerm", String.valueOf(requestCode));
         if (requestCode == 1) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 contact = true;
@@ -78,6 +84,15 @@ public class SplashActivity extends AppCompatActivity {
         if (requestCode == 2) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 call = true;
+                checkCallPermission();
+            } else {
+                Toast.makeText(SplashActivity.this, "Call Log Permission Denied", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        }
+        if (requestCode == 3) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                doCall = true;
                 goToMainActivity();
             } else {
                 Toast.makeText(SplashActivity.this, "Call Log Permission Denied", Toast.LENGTH_SHORT).show();
