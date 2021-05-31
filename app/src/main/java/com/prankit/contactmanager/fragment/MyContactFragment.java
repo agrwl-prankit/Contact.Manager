@@ -46,7 +46,10 @@ public class MyContactFragment extends Fragment {
         layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
 
         FloatingActionButton fab = view.findViewById(R.id.add_fab_button);
-        fab.setOnClickListener(v -> startActivity(new Intent(getActivity(), AddContactActivity.class)));
+        fab.setOnClickListener(v -> {
+            startActivity(new Intent(getActivity(), AddContactActivity.class));
+            getActivity().finish();
+        });
         getContact();
         return view;
     }

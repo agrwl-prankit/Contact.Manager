@@ -62,7 +62,7 @@ public class PhoneContactFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.child(phoneId).child("Phone Contact").exists()) dbRef.child(phoneId).child("Phone Contact").removeValue();
-                updateContactToServer();
+                //updateContactToServer();
             }
 
             @Override
@@ -76,22 +76,7 @@ public class PhoneContactFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && getContext().checkSelfPermission(Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(new String[]{Manifest.permission.READ_CONTACTS}, 1);
-        }
         getContact();
-    }
-
-        @RequiresApi(api = Build.VERSION_CODES.M)
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == 1) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            } else {
-                Toast.makeText(getContext(), "Please provide permission to read contacts", Toast.LENGTH_SHORT).show();
-            }
-        }
     }
 
     private void updateContactToServer() {

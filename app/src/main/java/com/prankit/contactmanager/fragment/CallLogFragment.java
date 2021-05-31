@@ -74,22 +74,7 @@ public class CallLogFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && getContext().checkSelfPermission(Manifest.permission.READ_CALL_LOG) != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(new String[]{Manifest.permission.READ_CALL_LOG}, 1);
-        }
         getCallDetails();
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == 1) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            } else {
-                Toast.makeText(getContext(), "Please provide permission to read call log", Toast.LENGTH_SHORT).show();
-            }
-        }
     }
 
     public void getCallDetails() {
@@ -120,7 +105,7 @@ public class CallLogFragment extends Fragment {
             String callNum = managedCursor.getString(number);
             String callDuration = managedCursor.getString(duration);
             Date callDayTime = new Date(Long.parseLong(managedCursor.getString(date)));
-            String callTime = callDayTime.toString().substring(11,17);
+            String callTime = callDayTime.toString().substring(11,16);
 //            String callDate = String.valueOf(callDayTime.getDate());
 //            String callMonth = String.valueOf(callDayTime.getMonth() + 1);
 //            String callYear = callDayTime.toString().substring(callDayTime.toString().length() - 4);

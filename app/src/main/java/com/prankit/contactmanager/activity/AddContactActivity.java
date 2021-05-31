@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -71,7 +72,7 @@ public class AddContactActivity extends AppCompatActivity {
             Contact contact = new Contact(Integer.parseInt(id), name, number);
             db.deleteContact(contact);
             Toast.makeText(this, "Contact deleted successfully", Toast.LENGTH_SHORT).show();
-            finish();
+            goToMainActivity();
         }).setNegativeButton("No", (dialogInterface, i) -> {});
         dialog.create(); dialog.show();
     }
@@ -86,7 +87,7 @@ public class AddContactActivity extends AppCompatActivity {
             Contact contact = new Contact(Integer.parseInt(id), name, number);
             db.updateContact(contact);
             Toast.makeText(this, "Contact update successfully", Toast.LENGTH_SHORT).show();
-            finish();
+            goToMainActivity();
         }
     }
 
@@ -99,14 +100,19 @@ public class AddContactActivity extends AppCompatActivity {
         else {
             Contact addContact = new Contact(name, number);
             db.addContacts(addContact);
+            goToMainActivity();
             Toast.makeText(this, "Contact added successfully", Toast.LENGTH_SHORT).show();
-            finish();
         }
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        goToMainActivity();
+    }
+
+    public void goToMainActivity(){
+        startActivity(new Intent(AddContactActivity.this, MainActivity.class));
         finish();
     }
 }

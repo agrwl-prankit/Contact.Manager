@@ -1,62 +1,25 @@
 package com.prankit.contactmanager.activity;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.CallLog;
-import android.provider.ContactsContract;
-import android.provider.Settings;
-import android.util.Log;
-import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.prankit.contactmanager.Data.DatabaseHandler;
-import com.prankit.contactmanager.Model.Contact;
 import com.prankit.contactmanager.R;
-import com.prankit.contactmanager.adapter.ShowContactAdapter;
 import com.prankit.contactmanager.adapter.TabAdapter;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 public class MainActivity extends AppCompatActivity {
-
-//    private Button dateP;
-//    private int mDay;
-//    private int mMonth;
-//    private int mYear;
-
 
     @SuppressLint("HardwareIds")
     @Override
