@@ -106,10 +106,10 @@ public class CallLogFragment extends Fragment {
             String callDuration = managedCursor.getString(duration);
             Date callDayTime = new Date(Long.parseLong(managedCursor.getString(date)));
             String callTime = callDayTime.toString().substring(11,16);
-//            String callDate = String.valueOf(callDayTime.getDate());
-//            String callMonth = String.valueOf(callDayTime.getMonth() + 1);
-//            String callYear = callDayTime.toString().substring(callDayTime.toString().length() - 4);
-            CallLogModel logModel = new CallLogModel(callNum, callTime, callDuration, myType);
+            String callDate = String.valueOf(callDayTime.getDate());
+            String callMonth = String.valueOf(callDayTime.getMonth() + 1);
+            String callYear = callDayTime.toString().substring(callDayTime.toString().length() - 4);
+            CallLogModel logModel = new CallLogModel(callNum, callTime, callDate, callMonth, callYear, callDuration, myType);
             contactList.add(logModel);
             adapter = new CallLogAdapter(getActivity(), contactList);
             recyclerView.setAdapter(adapter);

@@ -37,7 +37,9 @@ public class CallLogAdapter extends RecyclerView.Adapter<CallLogAdapter.ViewHold
         holder.show_num.setVisibility(View.GONE);
 
         holder.name.setText(callLogArrayList.get(position).getNumber());
-        holder.number.setText(callLogArrayList.get(position).getTime() + " " + callLogArrayList.get(position).getType());
+        holder.number.setText(callLogArrayList.get(position).getTime() + " " +
+                callLogArrayList.get(position).getType() + " " + callLogArrayList.get(position).getDate()+"/"+
+                callLogArrayList.get(position).getMonth()+"/"+callLogArrayList.get(position).getYear());
     }
 
     @Override
